@@ -62,3 +62,32 @@ Examples of good naming:
 - /employees/9e0343b9-a873-4db7-813e-fdeb68305d3b/departments
 - /candidates/search?name=jhon&page=1&offset=20
 
+First endpoint can be use to create/update a single employee, or even to retrive all of them
+
+Second endpoint is similar to the first one but based on departments
+
+The third can be use to update the departments of a given employee. Also to retrieve the departments where the employee is added (if the key is found)
+
+The last one is a search endpoint following the google semantic, it is retrieving the first page with only 20 candidates who are named as John
+
+Examples of bad naming:
+
+- /employee (not plural)
+- /departments/create (verbosity is not allowed)
+- /getEmployeeById (Please don't)
+- /search?type=candidate&name=jhon&page=1&offset=20 (Avoid using flags, wrong abstraction level)
+
+### Level 2:
+
+Http Verbs and right usage of Http Status Code.
+
+Since the endpoint does not allow be verbose, we have to use the Http Verbs to specify the kind of action we want to execute. In addition, is a good practice to choose the right Http Status Code to return if the action requested were succeeded or not.
+
+- POST (Use POST only for creating new resources, please return 201) **This operation is not idempotent**
+- GET (Use GET to retrieve data without changing the status of the server, please return 200, remember then it can be cached)
+- PUT (Use PUT to update a whole existing resource in an idempotent way, please return 200)
+- PATCH (Use PATCH to update partially an existing resource OR changing the state in a non idempotent way OR implement a command that is out from the REST convention OR many other reasons.. I just listed the most tipicals) **This operation should not be idempotent**
+- DELETE (Use DELETE to remove a resource from the server, please return 200) **This operation is not idempotent**
+
+As you notice is important to keep in mind the idempotency principle. Some operations must be idempotent by default, not others. If you are not familiar with idempotency, this is **a mathematical principle that is saying you'll always have the same result, no matter how many times you execute it**
+

@@ -91,3 +91,16 @@ Since the endpoint does not allow be verbose, we have to use the Http Verbs to s
 
 As you notice is important to keep in mind the idempotency principle. Some operations must be idempotent by default, not others. If you are not familiar with idempotency, this is **a mathematical principle that is saying you'll always have the same result, no matter how many times you execute it**
 
+### Level 3:
+
+Since this level is considered an overkill in the industry, and is not the purpose of this document, I'll skip it.
+
+## Further readings:
+
+* About [REST](https://restfulapi.net/)
+* About [Maturity Models](https://martinfowler.com/articles/richardsonMaturityModel.html)
+
+## 2nd Level the Pragmatic Approach
+..
+..
+TBD

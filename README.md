@@ -110,7 +110,42 @@ The next set of practices will help you to model a Rest Api focusing in the 2nd 
 
 ### Your endpoints are resources, not a representation of your datasource
 
-TBD
+Is important to identify the objects which they will be presented as resources in an agnostic manner.
+
+One of the most common pitfalls is to model the endpoints keeping the datasource on mind. I mean, imagine you have a Relational DataBase, and it contains VEHICLE, CAR, BIKE, PIECE, VEHICLE_PIECE... as examples
+
+Then it is wrong to have dedicated endpoints for each table, specially if VEHICLE is so abstract and it has no meaning by itself. So this is wrong:
+
+  * /vehicles
+
+  * /cars
+
+  * /bikes
+
+  * /pieces
+
+Probably just /cars and /bikes would be enough and to retrieve pieces you could model in this way:
+
+ * /cars/pieces: To deal with the full catalog of pieces for cars
+
+ * /bikes/pieces: To deal with the full catalog of pieces for bikes
+
+ * /cars/{id}/pieces: To deal with the pieces they were used to manufacture a specific model of car
+
+ * /bikes/{id}/pieces: To deal with the pieces they were used to manufacture a specific model of bike
+
+
+In addition, you could have more than just a single data source, what if you have also to serve images that they are saved in a local volume named /vehicles/images ? Again don't map your API against your storage. Your interface must not be attached to those kind of details, and it can be modelled in a different way. Examples:
+
+  * /images: full catalog of images if needed returning just the links to those images
+  * /cars/{id}/images: catalog of images for one car
+
+Finally is fine to have different endpoints which are modelling the same data in different ways. The data could have multiple representations, not just a single one. Examples:
+
+  * /cars/engines
+
+There is no "engines" table, in fact an engine is a "big piece" so probably it is stored at PIECE table. But we're representing the engine as part of our API as an important object
+
 
 ### Please use the right verbs
 
@@ -134,5 +169,13 @@ TBD
 TBD
 
 ### Follow the JSON Api for errors
+
+TBD
+
+### Separate Write from Read Models
+
+TBD
+
+### Having Multiple Models is fine
 
 TBD

@@ -101,6 +101,38 @@ Since this level is considered an overkill in the industry, and is not the purpo
 * About [Maturity Models](https://martinfowler.com/articles/richardsonMaturityModel.html)
 
 ## 2nd Level the Pragmatic Approach
-..
-..
+
+Level 2 is so valid, and in the 90% of the cases, is an acceptable approach, since it stands to encourage the good usage of namings (so then a right abstraction level) status codes a right verbs.
+
+Even we could say the level 2 is the pragmatic one, since it is pushing for the best practices but avoiding the complexity of the level 3.
+
+The next set of practices will help you to model a Rest Api focusing in the 2nd level and adding an extra layer of best practices to consider
+
+### Your endpoints are resources, not a representation of your datasource
+
+TBD
+
+### Please use the right verbs
+
+TBD
+
+### Use Patch for exceptions
+
+TBD
+
+### Consider the next set of Http Status codes by default
+
+TBD
+
+
+### Avoid easy guessing Id's as part of your endpoint
+
+TBD
+
+### Consider using pagination when heavy load of data is expected (Searchs endpoints)
+
+TBD
+
+### Follow the JSON Api for errors
+
 TBD

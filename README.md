@@ -62,11 +62,11 @@ Examples of good naming:
 - /employees/9e0343b9-a873-4db7-813e-fdeb68305d3b/departments
 - /candidates/search?name=jhon&page=1&offset=20
 
-First endpoint can be use to create/update a single employee, or even to retrive all of them
+First endpoint can be used to create/update a single employee, or even to retrive all of them
 
 Second endpoint is similar to the first one but based on departments
 
-The third can be use to update the departments of a given employee. Also to retrieve the departments where the employee is added (if the key is found)
+The third can be used to update the departments of a given employee. Also to retrieve the departments where the employee is added (if the key is found)
 
 The last one is a search endpoint following the google semantic, it is retrieving the first page with only 20 candidates who are named as John
 

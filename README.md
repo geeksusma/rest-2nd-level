@@ -22,7 +22,7 @@ Rest is resources oriented, so identifying the right level of abstraction for th
 
 #### Client Server:
 
-Clients and Servers can evolved isolated since the concerns are separated (but keeping on mind the interface must be respected) The main idea is to separate the user interface concerns (client) from the data storage concerns (server)
+Clients and Servers can evolve isolated since the concerns are separated (but keeping on mind the interface must be respected) The main idea is to separate the user interface concerns (client) from the data storage concerns (server)
 
 #### Staless:
 

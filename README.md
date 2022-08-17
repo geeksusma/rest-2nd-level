@@ -149,7 +149,10 @@ There is no "engines" table, in fact an engine is a "big piece" so probably it i
 
 ### Please use the right verbs
 
-TBD
+Remember to don't make your API verbose. That means verbs are not allowed as part of the endpoint. Just use:
+
+  * *POST:* For creating a new resource. Example: POST /cars The information about the new resource to create is inside the payload (body) of the request. *This operation is not idempotent* that means, if you retry the request, it will create the same resource again with a different Id. Be carefully with that
+  * *PUT:* TBD 
 
 ### Use Patch for exceptions
 

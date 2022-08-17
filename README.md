@@ -6,7 +6,7 @@
 
 - What is REST?
 
-REST is an acronym for REpresentational State Transfer and an architectural style for distributed hypermedia systems. 
+REST is an acronym for Representational State Transfer and an architectural style for distributed hypermedia systems. 
 
 - What is a REST API?
 

@@ -168,7 +168,21 @@ Even it is not a real concensus about when to use Patch. It is heavily used when
 
 ### Consider the next set of Http Status codes by default
 
-TBD
+  * Success:
+    * 201 - CREATED :arrow_right: Use it only when a new resource is "posted"
+    * 200 - SUCCESS :arrow_right: The request was processed succeded at the server
+    
+  * Bad Request:
+    * 400 - BAD REQUEST :arrow_right: The server undestood the request, but it failed. Use this Status when:
+      * The request has a lack of mandatory fields
+      * Or some fields are violating a business rule (what if I'm creating a car with only two wheels if four as the expected value for the server?)
+      * Or any other validation failed
+    * 401 - UNAUTHORISED :arrow_right: The requested resource/endpoint needs a previous authorisation and it was not found or expired
+    * 403 - FORBIDDEN :arrow_right: The authorisation is ok but it has no permissions to access to the requested resource/endpoint
+    * 404 - NOT FOUND :arrow_right: The requested resource does not exists in the system.
+    
+  * Internal Server Errors:
+    * 500 - Internal :arrow_right: Well this should not be never thrown from our server since it means something was not taken into account
 
 
 ### Avoid easy guessing Id's as part of your endpoint

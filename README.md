@@ -236,7 +236,9 @@ Consider to use UUID for that purpose. Here you have some readings about it:
 
 ### Consider using pagination when heavy load of data is expected (Searchs endpoints)
 
-TBD
+Sometime is fine to retrieve a whole collection of resources to perform later filtering/sorting at client side, this approach is fine when you don't expect a heavy load of data. But when so much data is expected, like historic data, there is a big risk of killing the backend side, in order to receive requests that are hard to process.
+
+So then, consider to use pagination at server side. Here you have a running example at [this repo](https://github.com/geeksusma/search-endpoint-example)
 
 ### Follow the JSON Api for errors
 

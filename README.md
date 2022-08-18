@@ -187,34 +187,34 @@ Even it is not a real concensus about when to use Patch. It is heavily used when
   * Internal Server Errors:
     * 500 - Internal :arrow_right: Well this should not be never thrown from our server since it means something was not taken into account
 
-Some Examples:
+Again this is a default approach, sometimes could be great to return a different kind of status code (like 405 - Conflict) Always it will depend on the use case you're modelling. For further reading please check the whole list of [Http Status Code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
 
 #### POST
 
-/cars - returns 201 if created :white_check_mark: 
-/cars - returns 200 if created :x:
+* /cars - returns 201 if created :white_check_mark: 
+* /cars - returns 200 if created :x:
 
-/cars - returns 400 if a validation failed and the car could not be created ✅
-/cars - returns 403 if the requester has no permissions to create a new car ✅
+* /cars - returns 400 if a validation failed and the car could not be created ✅
+* /cars - returns 403 if the requester has no permissions to create a new car ✅
 
 #### PUT/PATCH/DELETE
 
-/cars/abc-der-123 - returns 200 if updated ✅
+* /cars/abc-der-123 - returns 200 if updated ✅
 
-/cars/abc-der-123 - returns 404 if abc-der-123 car does not exists ✅
-/cars/abc-der-123 - returns 400 if a validation failed and the car could not be updated ✅
-/cars/abc-der-123 - returns 403 if the requester has no permissions to update/delete an existing car ✅
+* /cars/abc-der-123 - returns 404 if abc-der-123 car does not exists ✅
+* /cars/abc-der-123 - returns 400 if a validation failed and the car could not be updated ✅
+* /cars/abc-der-123 - returns 403 if the requester has no permissions to update/delete an existing car ✅
 
 #### GET
 
-/cars/abc-der-123 - returns 200 if car found ✅
-/cars/search?color=red - returns 200 if red cars found ✅
-/cars/search?color=green - returns 200 if green cars were not found ✅
+* /cars/abc-der-123 - returns 200 if car found ✅
+* /cars/search?color=red - returns 200 if red cars found ✅
+* /cars/search?color=green - returns 200 if green cars were not found ✅
 
-/cars/abc-der-123 - returns 404 if abc-der-123 car does not exists ✅
-/cars/abc-der-123 - returns 403 if the requester has no permissions to get an existing car ✅
-/cars - returns 403 if the requester has no permissions to retrieve the whole collection of cars ✅
-/cars/search?engine=electric - returns 403 if the requester has no permissions to search over the collection of cars ✅
+* /cars/abc-der-123 - returns 404 if abc-der-123 car does not exists ✅
+* /cars/abc-der-123 - returns 403 if the requester has no permissions to get an existing car ✅
+* /cars - returns 403 if the requester has no permissions to retrieve the whole collection of cars ✅
+* /cars/search?engine=electric - returns 403 if the requester has no permissions to search over the collection of cars ✅
 
 
 ### Avoid easy guessing Id's as part of your endpoint

@@ -254,7 +254,73 @@ Even it could be complicated, feel free to reduce/skip the amount of info to put
 
 ### Separate Write from Read Models
 
-TBD
+This pattern is comming from [CQRS](https://martinfowler.com/bliki/CQRS.html) in fact, what it is suggested is just a part of CQRS. The main idea here is, there is nothing wrong in model the same concept of the API in different ways. And it is a good idea to separate the model used to fetch/collect data from the model used to write/update data.
+
+The thing is, if just have a single "car" resource modelled in just one way, probably some clients will retrieve more data than expected. Example:
+
+* GET /cars ➡️ can return a Car object, fully detailed
+* GET /offroads ➡️ will return also cars, since a Offroad is a type of car, but modelled as an Offroad object, which has a different set of fields/attributes
+
+Similar thing when you have a custom model for creating/updating a resource (a car) probably the data needed to create a generic car is different than the data needed to create a offroad. And even the data needed to update a whole resource probably is different than the data needed to create the resource.
+
+So then is fine to have:
+
+#### Read Models
+
+```
+{
+  "car": {
+    "id": "abc-def-ghi",
+    "brand": "Volvo",
+    "model": "V40",
+    "engine": "v1.9 - 110cv - GAS",
+    "pieces": [
+      1,
+      2,
+      3
+    ]
+  }
+}
+```
+
+
+```
+{
+  "offroad": {
+    "id": "abc-def-ghi",
+    "brand": "Volvo",
+    "model": "CX90",
+    "fourTractionWheels": true,
+    "extras": [
+      1,
+      2,
+      3
+    ]
+  }
+}
+```
+
+#### Write Models
+
+```
+{
+  "newCar": {
+    "id": "abc-def-ghi",
+    "brand": "jkl-mn-opq",
+    "model": "New Model to hit the market!"
+  }
+}
+```
+
+```
+{
+  "updatedCar": {
+    "brand": "rst-abc-xyz",
+    "model": "Just renamed the model"
+  }
+}
+```
+
 
 ### Having Multiple Models is fine
 

@@ -219,7 +219,20 @@ Again this is a default approach, sometimes could be great to return a different
 
 ### Avoid easy guessing Id's as part of your endpoint
 
-TBD
+As it is shown in some examples above, the id of the resource is heavily used in order to perform fetching/updating/deleting operations. So then, is not a good idea to have any kind of easy guessing id, like an incremental id. Because that id can easily changed at the URL, and it could allow to you to receive information of any resource you're not allowed to access
+
+* /cars/6dd7f186-1ecb-11ed-861d-0242ac120002 ✅
+  * This is a hard guessing id, since even if the id gets changed at URI it would be hard to know a new valid Id
+* /cars/112 :x:
+  * This is wrong since a potential hacker could guess the id is autoincremental, and it could easily change the URL in order to check "what if I request 113 or 114"?
+
+Finally, again don't mix up concepts. The way of modelling the API must be agnostic from data sources and so on. Don't think in the id like if it were your primary key of a table in a database. The table in the database could have its own primary key (autoincremental) but as a private one. The only thing you need to consider is to have a public way to fetch/update/delete resources.
+
+Consider to use UUID for that purpose. Here you have some readings about it:
+
+* https://www.at7.it/en/blog/rest_uuid_resource
+* https://stackoverflow.com/questions/31584303/rest-api-and-uuid
+
 
 ### Consider using pagination when heavy load of data is expected (Searchs endpoints)
 

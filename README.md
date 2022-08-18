@@ -320,8 +320,3 @@ So then is fine to have:
   }
 }
 ```
-
-
-### Having Multiple Models is fine
-
-TBD

@@ -152,8 +152,11 @@ There is no "engines" table, in fact an engine is a "big piece" so probably it i
 Remember to don't make your API verbose. That means verbs are not allowed as part of the endpoint. Just use:
 
   * *POST:* To create a new resource. Example: POST /cars The information about the new resource to create is inside the payload (body) of the request. *This operation is not idempotent* that means, if you retry the request, it will create the same resource again with a different Id. Be carefully with that
+  
   * *PUT:* To update a whole existing resource. Example: PUT /cars/{id} The information about the updated resource is inside the payload (body) of the request. *This operation must be idempotent* No matter how many times the PUT is executed, the result must be the same
+  
   * *GET:* Use this verb for read only operations. Like Reading a single resource (GET /cars/{id}) or a collection (GET /cars) or when a search is executed (GET /cars/search?color=red&engine=1.6). *Do not put anything as part of the body payload since GET must be cacheable, use always query params*
+  
   * *DELETE:* To delete a whole resource. Example: DELETE /cars/{id}
 
 ### Use Patch for exceptions

@@ -242,7 +242,15 @@ So then, consider to use pagination at server side. Here you have a running exam
 
 ### Follow the JSON Api for errors
 
-TBD
+Just imagine, you need to check against the datasource if a car that is going to be created can be created, for example you need to check if there is no other model for that car exactly as the car you want to save, you want to avoid duplicities. And if finally there is some kind of duplicity, then you need to return an error back from the server.
+
+It was already mentioned, if that situation happens then we need to return a *400 Bad Request* but it doesn't bring enough information to let us know what really happened with that request. Probably we want to show an error message (that need to be translated to different languages) or probably we want to highlight a field in our UI that is the guilty of having that failure at backend side.
+
+To achieve that, we need a structure to follow to represent an error.
+
+Even there is no standard define about how to return errors from Backend side, the industry is recommeding to follow the [JSON Api approach.](https://jsonapi.org/format/#errors)
+
+Even it could be complicated, feel free to reduce/skip the amount of info to put inside the error structure. But at least try to follow that convention as much as possible. *Avoid return just a plain text with a generic message*
 
 ### Separate Write from Read Models
 

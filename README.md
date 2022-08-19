@@ -332,3 +332,21 @@ So then is fine to have:
   }
 }
 ```
+
+### Versioning best practices
+
+At least try to follow:
+
+- Enable backward compatibility
+- Keep the API Documentation updated to reflect new versions (or changes in the existing one)
+- Adapt API versioning to business requirements
+- Put API security considerations at the forefront
+
+Keep in mind, in the most of the cases, you'll start with the version 1 of your API, and it will never be changed. Only create a new version when a breaking change is introduced. For example:
+
+- A change in the format of the response data could break a caller
+- A change in types used for requesting/response data (changing an integer to a float)
+- Removing any part of the API
+
+Non-breaking changes, such as adding new endpoints or new response parameters, do not require a change to the major version number.
+

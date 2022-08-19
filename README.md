@@ -104,7 +104,7 @@ Since this level adds complexity at client/server side. It is not recommended fo
 * About [REST](https://restfulapi.net/)
 * About [Maturity Models](https://martinfowler.com/articles/richardsonMaturityModel.html)
 
-## 2nd Level the Pragmatic Approach
+## 2nd Level as the Pragmatic Approach
 
 Level 2 is valid enough, you will find it in the 90% of the cases, so it is an acceptable approach, since it stands to encourage the good usage of namings (so then a right abstraction level) status codes a right verbs.
 
@@ -114,11 +114,11 @@ The next set of practices will help you to model a Rest Api focusing in the 2nd 
 
 ### Your endpoints are resources, not a representation of your datasource
 
-Is important to identify the objects which they will be presented as resources in an agnostic manner.
+It is important to identify the objects which they will be presented as resources in an agnostic manner.
 
-One of the most common pitfalls is to model the endpoints keeping the datasource on mind. I mean, imagine you have a Relational DataBase, and it contains VEHICLE, CAR, BIKE, PIECE, VEHICLE_PIECE... as examples
+One of the most common pitfalls, is to design the endpoints keeping the datasource on mind. I mean, imagine you have a Relational Database, and it contains VEHICLE, CAR, BIKE, PIECE, VEHICLE_PIECE... as examples
 
-Then it is wrong to have dedicated endpoints for each table, specially if VEHICLE is so abstract and it has no meaning by itself. So this is wrong:
+Then it is wrong to have dedicated endpoints for each table, specially if VEHICLE is so abstract, and it has no meaning by itself. So this is wrong:
 
   * /vehicles
 
@@ -128,7 +128,7 @@ Then it is wrong to have dedicated endpoints for each table, specially if VEHICL
 
   * /pieces
 
-Probably just /cars and /bikes would be enough and to retrieve pieces you could model in this way:
+Probably just /cars and /bikes would be enough, and to retrieve pieces you could model in this way:
 
  * /cars/pieces: To deal with the full catalog of pieces for cars
 
@@ -139,54 +139,62 @@ Probably just /cars and /bikes would be enough and to retrieve pieces you could 
  * /bikes/{id}/pieces: To deal with the pieces they were used to manufacture a specific model of bike
 
 
-In addition, you could have more than just a single data source, what if you have also to serve images that they are saved in a local volume named /vehicles/images ? Again don't map your API against your storage. Your interface must not be attached to those kind of details, and it can be modelled in a different way. Examples:
+In addition, you could have more than just a single data source, what if you have also to serve images that they are saved in a local volume named /vehicles/images ? Again don't map your API against your storage. Your interface must not be attached to those kinds of details, and it can be modelled in a different way. Examples:
 
   * /images: full catalog of images if needed returning just the links to those images
   * /cars/{id}/images: catalog of images for one car
 
-Finally is fine to have different endpoints which are modelling the same data in different ways. The data could have multiple representations, not just a single one. Examples:
+Finally, is fine to have different endpoints which are modelling the same data in different ways. The data could have multiple representations, not just a single one. Examples:
 
   * /cars/engines
 
-There is no "engines" table, in fact an engine is a "big piece" so probably it is stored at PIECE table. But we're representing the engine as part of our API as an important object
+There is no "engines" table, in fact an engine is a "big piece" so probably it is stored at PIECE table. But we're representing the engine as part of our API as an important resource.
 
 
 ### Please use the right verbs
 
 Remember to don't make your API verbose. That means verbs are not allowed as part of the endpoint. Just use:
 
-  * *POST:* To create a new resource. Example: POST /cars The information about the new resource to create is inside the payload (body) of the request. *This operation is not idempotent* that means, if you retry the request, it will create the same resource again with a different Id. Be carefully with that
-  
-  * *PUT:* To update a whole existing resource. Example: PUT /cars/{id} The information about the updated resource is inside the payload (body) of the request. *This operation must be idempotent* No matter how many times the PUT is executed, the result must be the same
-  
+  * *POST:* To create a new resource. The information about the new resource to create, is inside the payload (body) of the request. *This operation is not idempotent* that means, if you retry the request, it will create the same resource again with a different id. Be carefully with that.
+
+```
+curl -d '{"newCar":{"id":"abc-def-ghi","brand":"jkl-mn-opq","model":"New Model to hit the market!"}}' -H "Content-Type: application/json" -X POST http://server:port/v1/cars
+```
+
+  * *PUT:* To update a whole existing resource. The information about the updated resource is inside the payload (body) of the request. *This operation must be idempotent* No matter how many times the PUT is executed, the result must be the same
+
+```
+curl -d '{"updatedCar":{"brand":"rst-abc-xyz","model":"Just renamed the model"}}' -H "Content-Type: application/json" -X PUT http://server:port/v1/cars/abc-def-ghi
+```
+
   * *GET:* Use this verb for read only operations. Like Reading a single resource (GET /cars/{id}) or a collection (GET /cars) or when a search is executed (GET /cars/search?color=red&engine=1.6). *Do not put anything as part of the body payload since GET must be cacheable, use always query params*
   
   * *DELETE:* To delete a whole resource. Example: DELETE /cars/{id}
 
 ### Use Patch for exceptions
 
-It is a special verb used when:
+It is a very special verb, useful when:
 
-  * You can't model the endpoint in a REST way. Example: /bikes/{id}/active or /bikes/{id}/inactive
+  * You can't design the endpoint in a REST way. Example: /bikes/{id}/active or /bikes/{id}/inactive
   * You want to update a resource partially
   * You can't ensure the idempotency of an update operation. Example: /bikes/{id}/toggle (which actives or not a bike, so it never would be idempotent)
 
-Even it is not a real concensus about when to use Patch. It is heavily used when a command needs to be implemented. Here you have a [further reading](https://stackoverflow.com/questions/28459418/use-of-put-vs-patch-methods-in-rest-api-real-life-scenarios)
+Even it is not a real consensus about when to use Patch. It is heavily used when a command needs to be implemented. Here you have a [further reading](https://stackoverflow.com/questions/28459418/use-of-put-vs-patch-methods-in-rest-api-real-life-scenarios)
 
 ### Consider the next set of Http Status codes by default
 
   * Success:
     * 201 - CREATED :arrow_right: Use it only when a new resource is "posted"
-    * 200 - SUCCESS :arrow_right: The request was processed succeded at the server
+    * 200 - SUCCESS :arrow_right: The request was processed succeeded at the server
     
   * Bad Request:
-    * 400 - BAD REQUEST :arrow_right: The server undestood the request, but it failed. Use this Status when:
+    * 400 - BAD REQUEST :arrow_right: The server understood the request, but it failed. Use this Status when:
       * The request has a lack of mandatory fields
       * Or some fields are violating a business rule (what if I'm creating a car with only two wheels if four as the expected value for the server?)
       * Or any other validation failed
     * 401 - UNAUTHORISED :arrow_right: The requested resource/endpoint needs a previous authorisation and it was not found or expired
-    * 403 - FORBIDDEN :arrow_right: The authorisation is ok but it has no permissions to access to the requested resource/endpoint
-    * 404 - NOT FOUND :arrow_right: The requested resource does not exists in the system.
+    * 403 - FORBIDDEN :arrow_right: The authorisation is ok, but it has no permissions to access to the requested resource/endpoint
+    * 404 - NOT FOUND :arrow_right: The requested resource does not exist in the system.
     
   * Internal Server Errors:
     * 500 - Internal :arrow_right: Well this should not be never thrown from our server since it means something was not taken into account
@@ -221,12 +229,12 @@ Again this is a default approach, sometimes could be great to return a different
 * /cars/search?engine=electric - returns 403 if the requester has no permissions to search over the collection of cars ✅
 
 
-### Avoid easy guessing Id's as part of your endpoint
+### Avoid easy guessing id's as part of your endpoint, keep your primary keys private!!
 
-As it is shown in some examples above, the id of the resource is heavily used in order to perform fetching/updating/deleting operations. So then, is not a good idea to have any kind of easy guessing id, like an incremental id. Because that id can easily changed at the URL, and it could allow to you to receive information of any resource you're not allowed to access
+As it is shown in some examples above, the id of the resource is heavily used in order to perform fetching/updating/deleting operations. So then, is not a good idea to have any kind of easy guessing id, like an incremental one. Because that id can be easily changed at the URL, and it could lead to a bad/wrong usage in order to receive non-allowed information of any other resource.
 
 * /cars/6dd7f186-1ecb-11ed-861d-0242ac120002 ✅
-  * This is a hard guessing id, since even if the id gets changed at URI it would be hard to know a new valid Id
+  * This is a hard guessing id, since even if the id gets changed at URI it would be hard to know a new valid id
 * /cars/112 :x:
   * This is wrong since a potential hacker could guess the id is autoincremental, and it could easily change the URL in order to check "what if I request 113 or 114"?
 
@@ -238,9 +246,9 @@ Consider to use UUID for that purpose. Here you have some readings about it:
 * https://stackoverflow.com/questions/31584303/rest-api-and-uuid
 
 
-### Consider using pagination when heavy load of data is expected (Searchs endpoints)
+### Consider using pagination when heavy load of data is expected (Search endpoints)
 
-Sometime is fine to retrieve a whole collection of resources to perform later filtering/sorting at client side, this approach is fine when you don't expect a heavy load of data. But when so much data is expected, like historic data, there is a big risk of killing the backend side, in order to receive requests that are hard to process.
+Sometime is fine to retrieve a whole collection of resources, to perform later filtering/sorting at client side. This approach is fine when you don't expect a heavy load of data. But when so much data is expected, like historic data, there is a big risk of killing the backend side, in order to receive requests that are hard to process.
 
 So then, consider to use pagination at server side. Here you have a running example at [this repo](https://github.com/geeksusma/search-endpoint-example)
 
@@ -248,17 +256,17 @@ So then, consider to use pagination at server side. Here you have a running exam
 
 Just imagine, you need to check against the datasource if a car that is going to be created can be created, for example you need to check if there is no other model for that car exactly as the car you want to save, you want to avoid duplicities. And if finally there is some kind of duplicity, then you need to return an error back from the server.
 
-It was already mentioned, if that situation happens then we need to return a *400 Bad Request* but it doesn't bring enough information to let us know what really happened with that request. Probably we want to show an error message (that need to be translated to different languages) or probably we want to highlight a field in our UI that is the guilty of having that failure at backend side.
+It was already mentioned, if that situation happens then we need to return a *400 Bad Request* but it doesn't bring enough information to let us know what really happened with that request. Probably we want to show an error message (that need to be translated to different languages) or probably we want to highlight a field in our UI that is the responsible for having that failure at backend side.
 
 To achieve that, we need a structure to follow to represent an error.
 
-Even there is no standard define about how to return errors from Backend side, the industry is recommeding to follow the [JSON Api approach.](https://jsonapi.org/format/#errors)
+Even there is no standard define about how to return errors from Backend side, the industry recommends following the [JSON Api approach.](https://jsonapi.org/format/#errors)
 
 Even it could be complicated, feel free to reduce/skip the amount of info to put inside the error structure. But at least try to follow that convention as much as possible. *Avoid return just a plain text with a generic message*
 
 ### Separate Write from Read Models
 
-This pattern is comming from [CQRS](https://martinfowler.com/bliki/CQRS.html) in fact, what it is suggested is just a part of CQRS. The main idea here is, there is nothing wrong in model the same concept of the API in different ways. And it is a good idea to separate the model used to fetch/collect data from the model used to write/update data.
+This pattern is coming from [CQRS](https://martinfowler.com/bliki/CQRS.html) in fact, what it is suggested is just a part of CQRS. The main idea here is, there is nothing wrong in model the same concept of the API in different ways. And it is a good idea to separate the model used to fetch/collect data from the model used to write/update data.
 
 The thing is, if just have a single "car" resource modelled in just one way, probably some clients will retrieve more data than expected. Example:
 

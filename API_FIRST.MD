@@ -1,22 +1,23 @@
-# API FIRST, MODELLING EXCERCISE
+# API FIRST, MODELLING EXERCISE
 ## What is API FIRST
 
-Is a concept that treats your API's as a first class citizen. It is standing to have consistent and reusable API's written in an API description language to stablish the contract.
+Is a concept that treats your API's as a first class citizen. It is standing to have consistent and reusable API's written in an API description language to Establish the contract.
 
-There are some advantages about using this approach, but my favourite one is about reducing the feedback loop. Writing the API First, is useful to validate the design with any pair. Or even it is encouraging to you to make questions before jumping to the production codebase. Always to do changes in the design is going to be cheaper if they are detected at early stages.
+There are some advantages about using this approach, but my favourite one is about reducing the feedback loop. Writing the API First, is useful to validate the design with any pair. Or even it is encouraging to you to make questions before jumping to the production codebase.
+Is always cheaper, if you have to do changes, if they are detected at early stages.
 
 ## Readings
 
 * [API First](https://swagger.io/resources/articles/adopting-an-api-first-approach/)
 * [API First How To with Swagger + SpringBoot](https://easyitblog.info/posts/api-first-approach-with-swagger/)
 
-## The Excercise
+## The Exercise
 
 ### Our Meetup Tracker
 
 ![Meetups!](https://cdn.iconscout.com/icon/free/png-256/meetup-5-739520.png)
 
-Imagine you want to design an API in order to keep track of the events your comunity are organising since you're tired of paying to Google Meetup.
+Imagine you want to design an API in order to keep track of the events your community are organising since you're tired of paying to Google Meetup.
 
 ```
 When an event is created, we have to define:
@@ -44,7 +45,7 @@ Bear in mind, an event is the past is closed for updates, so nobody could join a
 
 Once the event is passed is important to know if a person definitively went to the meetup, to measure how much absent people we have in our community. 
 
-After some days, people who really attended to the meetup, could set how they liked the event, adding a score from 0 (they didn't like) to 5 (best event in the world!) To do that, they will receive a notification to their email.
+After some days, people who really attended to the meetup, could set how they liked the event, adding a score from 0 (they didn't like) to 5 (Best event in the world!) To do that, they will receive a notification to their email.
 
 Bear in mind, the people registered are so responsible, so if they know in advance they could not be able to attend, they can remove itself from the event. Even they can be removed from the platform as well.
 
@@ -68,7 +69,7 @@ In addition, we'd like to receive from the search, some stats based on the peopl
 * Absent
 ```
 
-Finally, we'd like to have an easy way to collect all the people who acted as speaker/facilitator, and how many times, the data should be as follow, no matter if it is a speaker/facilitator
+Finally, we'd like to have an easy way to collect all the people who acted as speaker/facilitator, and how many times, the data should be as follows, no matter if it is a speaker/facilitator
 
 ```
 * Name: Name + Lastname
@@ -82,16 +83,18 @@ Please design an API in advance (you can use for example the [swagger editor](ht
 * ℹ️ At this point, we only want to know:
   * How many endpoints do we need? How they are going to be named? are some of them idempotent, not? why?
   * What kind of HTTP Verbs we have to use
-  * What are going to be the HTTP Status to represent, succees or ko
+  * What are going to be the HTTP Status to represent, success or ko
   * Our Data Model to represent the resources
 
 As you see, API First is encouraging to you to make questions at design time!
 
 ### Go ahead for some Outside in TDD!
 
-Once you are happy with the API designed in the previous step, let's go a little bit further, and design the whole solution using Outsided In TDD (From your API to the Datasource)
+Once you are happy with the API designed in the previous step, let's go a little bit further, and design the whole solution using Outside In TDD (From your API to the Datasource)
 
 Swagger Editor has a tool to export an API First YML file to code
 Also you can use a library like [RestAssured](https://rest-assured.io/) or [Cypress](https://circleci.com/blog/api-testing-with-cypress/)
 
-ℹ️ Just one last thing, the datasource is up to you, if you want to have a real database running at backend side is ok. If you want to have just an in-memmory implementation, it is also fine
+ℹ️ Just one last thing, the datasource is up to you, if you want to have a real database running at backend side is ok. If you want to have just an in-memory implementation, it is also fine
+
+:warning: Don't submit any PR to this repo! just fork it and do your implementation there ;)

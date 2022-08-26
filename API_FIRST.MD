@@ -36,12 +36,39 @@ For registering a new person in our platform, the system needs the next info in 
 * Name
 * Last Name
 * Email (must be unique in the system and for sure a valid email)
+
+All fields above are mandatories.
 ```
+
+Bear in mind, an event is the past is closed for updates, so nobody could join as attendee.
 
 Once the event is passed is important to know if a person definitively went to the meetup, to measure how much absent people we have in our community. 
 
-After some days, people who really attended to the meetup, could set how they liked the event, adding a score from 0 (they didn't like) to 5 (best event in the world!)
+After some days, people who really attended to the meetup, could set how they liked the event, adding a score from 0 (they didn't like) to 5 (best event in the world!) To do that, they will receive a notification to their email.
+
+Bear in mind, the people registered are so responsible, so if they know in advance they could not be able to attend, they can remove itself from the event. Even they can be removed from the platform as well.
+
+Finally, is important to allow complex searching over the events. No matter if they passed or if they are set in the future, we'd like to be able to filter by:
+
+```
+* Date Range: From/To if To is empty then To=TODAY
+* Location: Main Office, Cool Cowork or Remote
+* Title: It must be a "contains" and no case sensitive
+```
+
+In addition, we'd like to receive from the search, some stats based on the people registered to the event:
+```
+* Title
+* Date
+* Location
+* Registered People
+* Attendees
+* Absent
+```
 
 ### Design the API in advance
+
+Please design an API in advance (you can use for example the [swagger editor]() which later has tools to export the api to php, java...) in order to model the endpoints needed to cover the exercise.
+
 
 ### Go ahead for some Outside in TDD!

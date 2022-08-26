@@ -64,9 +64,9 @@ In addition, we'd like to receive from the search, some stats based on the peopl
 * Location
 * Speaker
 * Facilitator
-* Registered People
-* Attendees
-* Absent
+* Number of Registered People
+* Number of Attendees
+* Number of Absents
 ```
 
 Finally, we'd like to have an easy way to collect all the people who acted as speaker/facilitator, and how many times, the data should be as follows, no matter if it is a speaker/facilitator

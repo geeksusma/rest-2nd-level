@@ -26,7 +26,7 @@ When an event is created, we have to define:
 * Title and Description (only title is mandatory)
 * Location (Locations are already saved in the system, currently they are Main Office, Cool Cowork and Remote
 * Speaker
-* Facilitator
+* Facilitator (is optional)
 ```
 
 For an already created event, people can join if they were already registered in our platform. Speakers and Facilitators must be registered as well

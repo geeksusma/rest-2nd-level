@@ -1,4 +1,4 @@
-# API FIRST EXCERCISE
+# API FIRST, MODELLING EXCERCISE
 ## What is API FIRST
 
 Is a concept that treats your API's as a first class citizen. It is standing to have consistent and reusable API's written in an API description language to stablish the contract.
@@ -77,7 +77,21 @@ Finally, we'd like to have an easy way to collect all the people who acted as sp
 
 ### Design the API in advance
 
-Please design an API in advance (you can use for example the [swagger editor]() which later has tools to export the api to php, java...) in order to model the endpoints needed to cover the exercise.
+Please design an API in advance (you can use for example the [swagger editor](https://editor.swagger.io/) which later has tools to export the api to php, java...) in order to model the endpoints needed to cover the exercise.
 
+* ℹ️ At this point, we only want to know:
+  * How many endpoints do we need? How they are going to be named? are some of them idempotent, not? why?
+  * What kind of HTTP Verbs we have to use
+  * What are going to be the HTTP Status to represent, succees or ko
+  * Our Data Model to represent the resources
+
+As you see, API First is encouraging to you to make questions at design time!
 
 ### Go ahead for some Outside in TDD!
+
+Once you are happy with the API designed in the previous step, let's go a little bit further, and design the whole solution using Outsided In TDD (From your API to the Datasource)
+
+Swagger Editor has a tool to export an API First YML file to code
+Also you can use a library like [RestAssured](https://rest-assured.io/) or [Cypress](https://circleci.com/blog/api-testing-with-cypress/)
+
+ℹ️ Just one last thing, the datasource is up to you, if you want to have a real database running at backend side is ok. If you want to have just an in-memmory implementation, it is also fine

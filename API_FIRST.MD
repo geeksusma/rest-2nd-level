@@ -48,7 +48,7 @@ After some days, people who really attended to the meetup, could set how they li
 
 Bear in mind, the people registered are so responsible, so if they know in advance they could not be able to attend, they can remove itself from the event. Even they can be removed from the platform as well.
 
-Finally, is important to allow complex searching over the events. No matter if they passed or if they are set in the future, we'd like to be able to filter by:
+Also is important to allow complex searching over the events. No matter if they passed or if they are set in the future, we'd like to be able to filter by:
 
 ```
 * Date Range: From/To if To is empty then To=TODAY
@@ -61,9 +61,18 @@ In addition, we'd like to receive from the search, some stats based on the peopl
 * Title
 * Date
 * Location
+* Speaker
+* Facilitator
 * Registered People
 * Attendees
 * Absent
+```
+
+Finally, we'd like to have an easy way to collect all the people who acted as speaker/facilitator, and how many times, the data should be as follow, no matter if it is a speaker/facilitator
+
+```
+* Name: Name + Lastname
+* Events: Counting how many times the person acted as speaker/facilitator
 ```
 
 ### Design the API in advance
